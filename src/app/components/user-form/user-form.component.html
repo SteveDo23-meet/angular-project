@@ -1,0 +1,84 @@
+<div class="form-container">
+  <div class="form-box">
+    <h1>{{ pageTitle }}</h1>
+
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="firstName">שם פרטי:</label>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          placeholder="הכנס שם פרטי"
+          [ngClass]="{ 'is-invalid': firstName?.touched && firstName?.invalid }"
+        />
+        <div *ngIf="firstName?.touched && firstName?.invalid" class="error-message">
+          <small *ngIf="firstName?.errors?.['required']">שם פרטי חובה</small>
+          <small *ngIf="firstName?.errors?.['minlength']">שם פרטי חייב להיות לפחות 2 תווים</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">שם משפחה:</label>
+        <input
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          placeholder="הכנס שם משפחה"
+          [ngClass]="{ 'is-invalid': lastName?.touched && lastName?.invalid }"
+        />
+        <div *ngIf="lastName?.touched && lastName?.invalid" class="error-message">
+          <small *ngIf="lastName?.errors?.['required']">שם משפחה חובה</small>
+          <small *ngIf="lastName?.errors?.['minlength']">שם משפחה חייב להיות לפחות 2 תווים</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">דוא"ל:</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="הכנס דוא&quot;ל"
+          [ngClass]="{ 'is-invalid': email?.touched && email?.invalid }"
+        />
+        <div *ngIf="email?.touched && email?.invalid" class="error-message">
+          <small *ngIf="email?.errors?.['required']">דוא"ל חובה</small>
+          <small *ngIf="email?.errors?.['email']">דוא"ל חייב להיות תקין</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">טלפון:</label>
+        <input
+          type="tel"
+          id="phone"
+          formControlName="phone"
+          placeholder="הכנס מספר טלפון"
+          [ngClass]="{ 'is-invalid': phone?.touched && phone?.invalid }"
+        />
+        <div *ngIf="phone?.touched && phone?.invalid" class="error-message">
+          <small *ngIf="phone?.errors?.['required']">טלפון חובה</small>
+          <small *ngIf="phone?.errors?.['pattern']">טלפון חייב להיות 9-10 ספרות</small>
+        </div>
+      </div>
+
+      <div *ngIf="successMessage" class="success-alert">
+        {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="error-alert">
+        {{ errorMessage }}
+      </div>
+
+      <div class="button-group">
+        <button type="submit" [disabled]="!isFormValid || isSubmitting" class="btn-submit">
+          {{ isSubmitting ? 'שמירה...' : submitButtonText }}
+        </button>
+        <button type="button" (click)="cancel()" class="btn-cancel" [disabled]="isSubmitting">
+          ביטול
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

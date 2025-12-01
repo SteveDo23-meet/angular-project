@@ -1,0 +1,55 @@
+<div class="login-container">
+  <div class="login-box">
+    <h1>כניסה למערכת</h1>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="username">שם משתמש:</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="הכנס שם משתמש"
+          [ngClass]="{ 'is-invalid': username?.touched && username?.invalid }"
+        />
+        <div *ngIf="username?.touched && username?.invalid" class="error-message">
+          <small *ngIf="username?.errors?.['required']">שם משתמש חובה</small>
+          <small *ngIf="username?.errors?.['minlength']">שם משתמש חייב להיות לפחות 3 תווים</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">סיסמה:</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="הכנס סיסמה"
+          [ngClass]="{ 'is-invalid': password?.touched && password?.invalid }"
+        />
+        <div *ngIf="password?.touched && password?.invalid" class="error-message">
+          <small *ngIf="password?.errors?.['required']">סיסמה חובה</small>
+          <small *ngIf="password?.errors?.['minlength']">סיסמה חייבת להיות לפחות 4 תווים</small>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-alert">
+        {{ errorMessage }}
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!isFormValid || isLoading"
+        class="btn-login"
+      >
+        {{ isLoading ? 'כניסה...' : 'כניסה' }}
+      </button>
+    </form>
+
+    <div class="demo-info">
+      <p><strong>משתמש ניסיון:</strong></p>
+      <p>שם משתמש: demo</p>
+      <p>סיסמה: 1234</p>
+    </div>
+  </div>
+</div>
