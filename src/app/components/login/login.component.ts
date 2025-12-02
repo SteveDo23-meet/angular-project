@@ -43,7 +43,6 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    // Simulate login process
     setTimeout(() => {
       const { username } = this.loginForm.value;
       this.userService.setLoggedInUser(username);
