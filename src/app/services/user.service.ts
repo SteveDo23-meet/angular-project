@@ -7,7 +7,6 @@ import { User, UserModel } from '../models/user';
 })
 export class UserService {
   private readonly STORAGE_KEY = 'users_data';
-  private readonly LOGGED_IN_USER_KEY = 'logged_in_user';
   private usersSubject = new BehaviorSubject<User[]>(this.loadUsersFromStorage());
   public users$ = this.usersSubject.asObservable();
 
@@ -71,21 +70,5 @@ export class UserService {
     this.saveUsersToStorage(users);
     this.usersSubject.next(users);
   }
-
-  setLoggedInUser(username: string): void {
-    localStorage.setItem(this.LOGGED_IN_USER_KEY, JSON.stringify({ username, loginTime: new Date().toISOString() }));
-  }
-
-  getLoggedInUser(): any {
-    const data = localStorage.getItem(this.LOGGED_IN_USER_KEY);
-    return data ? JSON.parse(data) : null;
-  }
-
-  isUserLoggedIn(): boolean {
-    return localStorage.getItem(this.LOGGED_IN_USER_KEY) !== null;
-  }
-
-  logout(): void {
-    localStorage.removeItem(this.LOGGED_IN_USER_KEY);
-  }
+ 
 }

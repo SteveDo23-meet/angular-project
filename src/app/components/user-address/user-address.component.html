@@ -1,0 +1,3 @@
+<div class="addresses" *ngIf="addresses && addresses.length > 0">
+  <div *ngFor="let a of addresses" class="addr">{{ a.street }}, {{ a.city }}</div>
+</div>

@@ -6,6 +6,7 @@ import { UserItemComponent } from '../user-item/user-item.component';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 
 @Component({
@@ -22,6 +23,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -36,11 +38,11 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   private checkAuthentication(): void {
-    if (!this.userService.isUserLoggedIn()) {
+    if (!this.authService.isUserLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
-    this.loggedInUser = this.userService.getLoggedInUser();
+    this.loggedInUser = this.authService.getLoggedInUser();
   }
 
   private loadUsers(): void {
@@ -66,7 +68,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.userService.logout();
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 

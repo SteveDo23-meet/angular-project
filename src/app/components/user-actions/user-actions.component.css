@@ -1,0 +1,3 @@
+.actions-inline { display:flex; gap:8px; }
+.btn-edit.small { padding:4px 8px; font-size:12px; }
+.btn-delete.small { padding:4px 8px; font-size:12px; }

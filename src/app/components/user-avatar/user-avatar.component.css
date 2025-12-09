@@ -1,0 +1,11 @@
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#6c5ce7,#00b894);
+  color: white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+}

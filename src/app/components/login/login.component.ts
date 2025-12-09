@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -45,7 +47,7 @@ export class LoginComponent {
 
     setTimeout(() => {
       const { username } = this.loginForm.value;
-      this.userService.setLoggedInUser(username);
+      this.authService.setLoggedInUser(username);
       this.isLoading = false;
       this.router.navigate(['/users']);
     }, 500);

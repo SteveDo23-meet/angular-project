@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray } fr
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 
 @Component({
@@ -24,6 +25,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -55,7 +57,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   private checkAuthentication(): void {
-    if (!this.userService.isUserLoggedIn()) {
+    if (!this.authService.isUserLoggedIn()) {
       this.router.navigate(['/login']);
     }
   }
