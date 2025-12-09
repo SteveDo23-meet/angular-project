@@ -63,6 +63,20 @@
         </div>
       </div>
 
+      <div formArrayName="addresses" class="addresses-box">
+        <h3>כתובות</h3>
+        <div *ngFor="let addr of addresses.controls; let i = index" [formGroupName]="i" class="address-group">
+          <input type="text" formControlName="street" placeholder="רחוב" [ngClass]="{ 'is-invalid': addr.get('street')?.touched && addr.get('street')?.invalid }" />
+          <input type="text" formControlName="city" placeholder="עיר" [ngClass]="{ 'is-invalid': addr.get('city')?.touched && addr.get('city')?.invalid }" />
+          <button type="button" (click)="removeAddress(i)" class="btn-remove">הסר</button>
+          <div *ngIf="(addr.get('street')?.touched && addr.get('street')?.invalid) || (addr.get('city')?.touched && addr.get('city')?.invalid)" class="error-message">
+            <small *ngIf="addr.get('street')?.errors?.['required']">רחוב חובה</small>
+            <small *ngIf="addr.get('city')?.errors?.['required']">עיר חובה</small>
+          </div>
+        </div>
+        <button type="button" (click)="addAddress()" class="btn-add-address">הוסף כתובת</button>
+      </div>
+
       <div *ngIf="successMessage" class="success-alert">
         {{ successMessage }}
       </div>

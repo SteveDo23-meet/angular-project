@@ -11,38 +11,20 @@
 
   <div class="content">
     <div class="controls">
-      <button (click)="addNewUser()" class="btn-add">הוסף משתמש חדש</button>
+      <div class="left-controls">
+        <button (click)="addNewUser()" class="btn-add">הוסף משתמש חדש</button>
+        <input [formControl]="searchControl" placeholder="חפש משתמש לפי שם/מייל/טלפון" class="search-input" />
+      </div>
       <div class="stats">
-        <span>סה"כ משתמשים: <strong>{{ usersCount }}</strong></span>
+        <span>סה""כ משתמשים: <strong>{{ usersCount }}</strong></span>
       </div>
     </div>
-
-    <div *ngIf="users.length > 0" class="table-responsive">
-      <table class="users-table">
-        <thead>
-          <tr>
-            <th>מזהה</th>
-            <th>שם פרטי</th>
-            <th>שם משפחה</th>
-            <th>דוא"ל</th>
-            <th>טלפון</th>
-            <th>פעולות</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of users" [ngClass]="{ 'even-row': users.indexOf(user) % 2 === 0 }">
-            <td>{{ user.id }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
-            <td class="actions">
-              <button (click)="editUser(user)" class="btn-edit">עריכה</button>
-              <button (click)="deleteUser(user.id)" class="btn-delete">מחיקה</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="users.length > 0" class="list-responsive">
+      <div class="users-list">
+        <ng-container *ngFor="let user of (users | search: searchControl.value)">
+          <app-user-item [user]="user" (edit)="editUser($event)" (remove)="deleteUser($event)"></app-user-item>
+        </ng-container>
+      </div>
     </div>
 
     <div *ngIf="users.length === 0" class="no-users">

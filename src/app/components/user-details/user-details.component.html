@@ -1,0 +1,12 @@
+<div class="details-container" *ngIf="user">
+  <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+  <div class="meta">דוא"ל: {{ user.email }}</div>
+  <div class="meta">טלפון: {{ user.phone }}</div>
+
+  <div *ngIf="user.addresses && user.addresses.length > 0" class="addresses">
+    <h3>כתובות</h3>
+    <ul>
+      <li *ngFor="let a of user.addresses">{{ a.street }} - {{ a.city }}</li>
+    </ul>
+  </div>
+</div>

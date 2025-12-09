@@ -48,6 +48,9 @@ export class UserService {
     const users = this.loadUsersFromStorage();
     const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
     const newUser: User = new UserModel(newId, user.firstName, user.lastName, user.email, user.phone);
+    if ((user as any).addresses) {
+      newUser.addresses = (user as any).addresses;
+    }
     users.push(newUser);
     this.saveUsersToStorage(users);
     this.usersSubject.next(users);
@@ -57,7 +60,7 @@ export class UserService {
     const users = this.loadUsersFromStorage();
     const index = users.findIndex(user => user.id === id);
     if (index !== -1) {
-      users[index] = { id, ...updatedUser };
+      users[index] = { id, ...updatedUser } as User;
       this.saveUsersToStorage(users);
       this.usersSubject.next(users);
     }

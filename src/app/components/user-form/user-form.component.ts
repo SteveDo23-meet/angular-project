@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -31,8 +31,11 @@ export class UserFormComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{9,10}$/)]]
+      phone: ['', [Validators.required, Validators.pattern(/^\d{9,10}$/)]],
+      addresses: this.fb.array([])
     });
+    // start with one empty address group
+    this.addresses.push(this.createAddressGroup());
   }
 
   ngOnInit(): void {
@@ -83,6 +86,25 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   get phone() {
     return this.userForm.get('phone');
+  }
+
+  get addresses(): FormArray {
+    return this.userForm.get('addresses') as FormArray;
+  }
+
+  createAddressGroup(): FormGroup {
+    return this.fb.group({
+      street: ['', Validators.required],
+      city: ['', Validators.required]
+    });
+  }
+
+  addAddress(): void {
+    this.addresses.push(this.createAddressGroup());
+  }
+
+  removeAddress(index: number): void {
+    this.addresses.removeAt(index);
   }
 
   get isFormValid(): boolean {

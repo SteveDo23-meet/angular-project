@@ -92,6 +92,12 @@ form {
   justify-content: flex-end;
 }
 
+.addresses-box { margin-top: 18px; }
+.address-group { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.address-group input { flex: 1; padding: 8px; border: 2px solid #ddd; border-radius: 4px; }
+.btn-remove { background: #dc3545; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; }
+.btn-add-address { margin-top: 6px; background: #17a2b8; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+
 .btn-submit {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;

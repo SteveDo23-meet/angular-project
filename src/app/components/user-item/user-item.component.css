@@ -1,0 +1,6 @@
+.user-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; background: white; }
+.user-item .name { font-weight: 600; }
+.user-item .meta { color: #666; font-size: 13px; }
+.user-item .actions { display: flex; gap: 8px; }
+.btn-edit { background: #007bff; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; }
+.btn-delete { background: #dc3545; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; }

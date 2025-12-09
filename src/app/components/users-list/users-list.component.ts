@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { SearchPipe } from '../../pipes/search.pipe';
+import { UserItemComponent } from '../user-item/user-item.component';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -7,12 +10,13 @@ import { User } from '../../models/user';
 
 @Component({
   selector: 'app-users-list',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, SearchPipe, UserItemComponent],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })
 export class UsersListComponent implements OnInit, OnDestroy {
   users: User[] = [];
+  searchControl = new FormControl('');
   loggedInUser: any = null;
   private destroy$ = new Subject<void>();
 

@@ -4,6 +4,7 @@ export interface User {
   lastName: string;
   email: string;
   phone: string;
+  addresses?: { street: string; city: string }[];
 }
 
 export class UserModel implements User {
@@ -12,6 +13,7 @@ export class UserModel implements User {
   lastName: string;
   email: string;
   phone: string;
+  addresses?: { street: string; city: string }[];
 
   constructor(
     id: number,
@@ -25,5 +27,6 @@ export class UserModel implements User {
     this.lastName = lastName;
     this.email = email;
     this.phone = phone;
+    this.addresses = [];
   }
 }
