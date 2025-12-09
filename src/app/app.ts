@@ -18,10 +18,8 @@ export class App implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // hide header/footer on the login route
     this.sub = this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((ev: any) => {
       const url: string = ev.urlAfterRedirects || ev.url || '';
-      // adjust paths where header/footer should be hidden
       this.showLayout = !(url === '/login' || url.startsWith('/login'));
     });
   }
